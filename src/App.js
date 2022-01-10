@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Blog from "./Routes/Blog";
 import Home from "./Routes/Home";
-import styled from "styled-components";
 
 function App() {
   return (

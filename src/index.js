@@ -57,6 +57,10 @@ body {
   width: 100vw;
   overflow:hidden;
 }
+a {
+  text-decoration:none;
+  color: inherit;
+}
 `;
 
 ReactDOM.render(
