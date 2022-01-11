@@ -13,21 +13,25 @@ const Sidebox = styled(motion.div)`
   overflow: auto;
   border-right: #bdc3c7 solid 1px;
   padding: 20px 10px;
+  background-color: white;
+  z-index: 2;
 `;
 
 const CloseBtn = styled.button`
   background: none;
   border: none;
-  margin-left: 120px;
+  margin-left: 100px;
   cursor: pointer;
+  z-index: 1;
 `;
 
 const OpenBtn = styled.button`
   background: none;
   border: none;
   margin-left: 20px;
-  margin-top: 20px;
   cursor: pointer;
+  position: fixed;
+  margin-top: 20px;
 `;
 
 const sideBoxVariants = {
@@ -45,7 +49,7 @@ const sideBoxVariants = {
 };
 
 export default function Sidebar() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const onToggle = () => {
     setOpen(!open);
   };
