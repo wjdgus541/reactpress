@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDoubleLeft,
@@ -34,6 +35,14 @@ const OpenBtn = styled.button`
   margin-top: 20px;
 `;
 
+const List = styled.ul`
+  list-style: none;
+`;
+
+const Item = styled.li`
+  color: black;
+`;
+
 const sideBoxVariants = {
   initial: {
     x: -150,
@@ -48,11 +57,12 @@ const sideBoxVariants = {
   },
 };
 
-export default function Sidebar() {
+export default function Sidebar({ mdList }) {
   const [open, setOpen] = useState(true);
   const onToggle = () => {
     setOpen(!open);
   };
+
   return (
     <>
       <AnimatePresence>
@@ -66,9 +76,24 @@ export default function Sidebar() {
             <CloseBtn onClick={onToggle}>
               <FontAwesomeIcon icon={faAngleDoubleLeft} />
             </CloseBtn>
-            <ul>
-              <li>asd</li>
-            </ul>
+            {mdList ? (
+              <List>
+                {Object.keys(mdList).map((item, index) => {
+                  return (
+                    <Item key={item}>
+                      <Link
+                        to={{
+                          pathname: `/blog/${item}`,
+                          state: { blogtitle: item },
+                        }}
+                      >
+                        {item}
+                      </Link>
+                    </Item>
+                  );
+                })}
+              </List>
+            ) : null}
           </Sidebox>
         ) : null}
       </AnimatePresence>

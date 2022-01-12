@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -8,11 +9,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function MdConverter() {
+function MdConverter() {
   const [md, setMd] = useState("");
+  const { state } = useLocation();
 
-  const testmd = import(`../MDs/testmd.md`).then((r) => r.default);
-  useEffect(() => {
+  const selectTitle = (title) => {
+    const testmd = import(`../MDs/${title}.md`).then((r) => r.default);
     testmd.then((data) => {
       fetch(data)
         .then((d) => d.text())
@@ -20,7 +22,8 @@ export default function MdConverter() {
           setMd(text);
         });
     });
-  });
+  };
+  state ? selectTitle(state.blogtitle) : selectTitle("main");
 
   return (
     <Wrapper>
@@ -28,3 +31,5 @@ export default function MdConverter() {
     </Wrapper>
   );
 }
+
+export default React.memo(MdConverter);
