@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, Switch } from "react-router-dom";
 import styled from "styled-components";
+import Search from "./Search";
 
 const Navbox = styled.div`
   min-height: 50px;
@@ -15,9 +16,16 @@ const Home = styled.h1`
   font-weight: 600;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Blog = styled.h2`
   font-size: 15px;
   font-weight: 400;
+  margin-left: 20px;
 `;
 
 export default function Navbar() {
@@ -26,9 +34,12 @@ export default function Navbar() {
       <Link to="/">
         <Home>HOME</Home>
       </Link>
-      <Link to="/blog">
-        <Blog>Blog</Blog>
-      </Link>
+      <Wrapper>
+        <Search />
+        <Link to="/blog">
+          <Blog>Blog</Blog>
+        </Link>
+      </Wrapper>
     </Navbox>
   );
 }

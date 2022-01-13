@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MdConverter from "../Components/MdConverter";
 import Sidebar from "../Components/Sidebar";
+import { blogListAtom } from "../recoil";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ const ContentsBox = styled.div`
 `;
 
 export default function Blog() {
-  const [mdList, setMdList] = useState({});
+  const [blogList, setBlogList] = useRecoilState(blogListAtom);
 
   useEffect(() => {
     const list = function importAll() {
@@ -26,15 +28,19 @@ export default function Blog() {
       });
       return files;
     };
-    setMdList(list);
+    setBlogList(list);
   }, []);
 
   return (
     <Wrapper>
-      <Sidebar mdList={mdList} />
-      <ContentsBox>
-        <MdConverter />
-      </ContentsBox>
+      {blogList ? (
+        <>
+          <Sidebar blogList={blogList} />
+          <ContentsBox>
+            <MdConverter />
+          </ContentsBox>
+        </>
+      ) : null}
     </Wrapper>
   );
 }

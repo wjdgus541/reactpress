@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDoubleLeft,
@@ -36,6 +36,7 @@ const OpenBtn = styled.button`
 `;
 
 const List = styled.ul`
+  padding: 0;
   list-style: none;
 `;
 
@@ -57,7 +58,7 @@ const sideBoxVariants = {
   },
 };
 
-export default function Sidebar({ mdList }) {
+export default function Sidebar({ blogList }) {
   const [open, setOpen] = useState(true);
   const onToggle = () => {
     setOpen(!open);
@@ -76,9 +77,9 @@ export default function Sidebar({ mdList }) {
             <CloseBtn onClick={onToggle}>
               <FontAwesomeIcon icon={faAngleDoubleLeft} />
             </CloseBtn>
-            {mdList ? (
+            {blogList ? (
               <List>
-                {Object.keys(mdList).map((item, index) => {
+                {Object.keys(blogList).map((item, index) => {
                   return (
                     <Item key={item}>
                       <Link
