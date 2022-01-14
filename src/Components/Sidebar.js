@@ -8,22 +8,32 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 
+const Wrapper = styled.div`
+  margin-top: 50px;
+  z-index: 1;
+`;
+
 const Sidebox = styled(motion.div)`
-  height: 100vh;
+  background-color: ${(props) => props.theme.bgColor};
+  height: 88vh;
   width: 150px;
-  overflow: auto;
   border-right: #bdc3c7 solid 1px;
-  padding: 20px 10px;
-  background-color: white;
-  z-index: 2;
+  padding: 20px;
+  z-index: 11;
+  overflow: auto;
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const CloseBtn = styled.button`
   background: none;
   border: none;
-  margin-left: 100px;
+  color: ${(props) => props.theme.textColor};
   cursor: pointer;
-  z-index: 1;
+  z-index: 10;
 `;
 
 const OpenBtn = styled.button`
@@ -33,15 +43,20 @@ const OpenBtn = styled.button`
   cursor: pointer;
   position: fixed;
   margin-top: 20px;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const List = styled.ul`
-  padding: 0;
   list-style: none;
 `;
 
 const Item = styled.li`
-  color: black;
+  width: 100%;
+`;
+
+const ItemLink = styled(Link)`
+  width: 100%;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const sideBoxVariants = {
@@ -65,7 +80,7 @@ export default function Sidebar({ blogList }) {
   };
 
   return (
-    <>
+    <Wrapper>
       <AnimatePresence>
         {open ? (
           <Sidebox
@@ -74,23 +89,23 @@ export default function Sidebar({ blogList }) {
             animate="visible"
             exit="leaving"
           >
-            <CloseBtn onClick={onToggle}>
-              <FontAwesomeIcon icon={faAngleDoubleLeft} />
-            </CloseBtn>
+            <BtnWrapper>
+              <CloseBtn onClick={onToggle}>
+                <FontAwesomeIcon icon={faAngleDoubleLeft} />
+              </CloseBtn>
+            </BtnWrapper>
             {blogList ? (
               <List>
                 {Object.keys(blogList).map((item, index) => {
                   return (
-                    <Item key={item}>
-                      <Link
-                        to={{
-                          pathname: `/blog/${item}`,
-                          state: { blogtitle: item },
-                        }}
-                      >
-                        {item}
-                      </Link>
-                    </Item>
+                    <ItemLink
+                      to={{
+                        pathname: `/blog/${item}`,
+                        state: { blogtitle: item },
+                      }}
+                    >
+                      <Item key={item}>{item}</Item>
+                    </ItemLink>
                   );
                 })}
               </List>
@@ -101,6 +116,6 @@ export default function Sidebar({ blogList }) {
       <OpenBtn onClick={onToggle}>
         <FontAwesomeIcon icon={faAngleDoubleRight} />
       </OpenBtn>
-    </>
+    </Wrapper>
   );
 }

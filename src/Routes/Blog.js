@@ -10,10 +10,10 @@ const Wrapper = styled.div`
 `;
 
 const ContentsBox = styled.div`
-  width: 100vw;
   display: flex;
   justify-content: center;
   padding: 40px 20px;
+  width: 100%;
 `;
 
 export default function Blog() {

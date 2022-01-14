@@ -9,7 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const SearchForm = styled(motion.form)`
   border-radius: 20px;
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.accentColor};
   padding: 5px 5px;
   display: flex;
   align-items: center;
@@ -21,13 +21,15 @@ const IconBox = styled(motion.div)`
 `;
 
 const SearchIcon = styled(FontAwesomeIcon).attrs({ icon: faSearch })`
-  color: gray;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const SearchInput = styled.input`
   border: none;
   margin-left: 5px;
   width: 150px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
   &:focus {
     outline: none;
   }
@@ -35,7 +37,7 @@ const SearchInput = styled.input`
 
 const SearchList = styled.ul`
   position: fixed;
-  width: 160px;
+  width: 196px;
   top: 30px;
   background-color: white;
   border: solid 1px gray;
@@ -44,6 +46,11 @@ const SearchList = styled.ul`
 
 const SearchItem = styled.li`
   width: 100%;
+  background-color: ${(props) => props.theme.bgColor};
+`;
+
+const SearchLink = styled(Link)`
+  width: 100px;
 `;
 
 const formVariants = {
@@ -82,11 +89,7 @@ export default function Search() {
   const searchBoxToggle = () => {
     setSearchOpen((prev) => !prev);
   };
-  const outFocus = () => {
-    setfilterList([]);
-    setSearchValue("");
-    setSearchOpen(false);
-  };
+
   const onEnter = (e) => {
     if (e.key === "Enter") {
       if (filterList[0]) {
@@ -96,7 +99,14 @@ export default function Search() {
       }
     }
   };
-  const resetfilter = () => {
+  const outFocus = (e) => {
+    // console.log("blur : ", e);
+    setfilterList([]);
+    setSearchValue("");
+    setSearchOpen(false);
+  };
+  const resetfilter = (e) => {
+    // console.log("search : ", e);
     setfilterList([]);
     setSearchValue("");
   };
@@ -131,17 +141,15 @@ export default function Search() {
             {filterList.length > 0 ? (
               <SearchList>
                 {filterList.map((item) => (
-                  <SearchItem key={item}>
-                    <Link
-                      to={{
-                        pathname: `/blog/${item}`,
-                        state: { blogtitle: item },
-                      }}
-                      onClick={resetfilter}
-                    >
-                      {item}
-                    </Link>
-                  </SearchItem>
+                  <SearchLink
+                    to={{
+                      pathname: `/blog/${item}`,
+                      state: { blogtitle: item },
+                    }}
+                    onClick={resetfilter}
+                  >
+                    <SearchItem key={item}>{item}</SearchItem>
+                  </SearchLink>
                 ))}
               </SearchList>
             ) : null}
