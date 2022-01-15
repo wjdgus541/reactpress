@@ -5,8 +5,10 @@ import Home from "./Routes/Home";
 import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "styled-components";
 import { useRecoilValue } from "recoil";
-import { isDarkAtom } from "./recoil";
+import { isDarkAtom, blogListAtom } from "./recoil";
 import { createGlobalStyle } from "styled-components";
+import { useSetRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -31,6 +33,20 @@ p {
 
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
+
+  const setBlogList = useSetRecoilState(blogListAtom);
+
+  useEffect(() => {
+    const list = function importAll() {
+      const result = require.context(`./MDs`);
+      let files = {};
+      result.keys().map((item, index) => {
+        files[item.slice(2, -3)] = result(item);
+      });
+      return files;
+    };
+    setBlogList(list);
+  }, []);
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />

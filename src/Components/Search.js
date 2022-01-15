@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { blogListAtom } from "../recoil";
 import { useRecoilValue } from "recoil";
 import { Link, useHistory } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 const SearchForm = styled(motion.form)`
   border-radius: 20px;
@@ -18,9 +17,11 @@ const SearchForm = styled(motion.form)`
 const IconBox = styled(motion.div)`
   cursor: pointer;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
 `;
 
-const SearchIcon = styled(FontAwesomeIcon).attrs({ icon: faSearch })`
+const SearchIcon = styled(FaSearch)`
   color: ${(props) => props.theme.textColor};
 `;
 
@@ -133,7 +134,7 @@ export default function Search() {
                 value={searchValue}
                 onChange={onChange}
                 onKeyPress={onEnter}
-                onBlur={outFocus}
+                // onBlur={outFocus}
                 ref={inputFocus}
                 type="text"
               />

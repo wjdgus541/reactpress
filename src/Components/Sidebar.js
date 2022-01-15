@@ -1,23 +1,24 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDoubleLeft,
-  faAngleDoubleRight,
-} from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
+import MdConverter from "./MdConverter";
 
 const Wrapper = styled.div`
   margin-top: 50px;
   z-index: 1;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 `;
 
 const Sidebox = styled(motion.div)`
   background-color: ${(props) => props.theme.bgColor};
-  height: 88vh;
   width: 150px;
-  border-right: #bdc3c7 solid 1px;
+  height: 88vh;
+  border-right: ${(props) => props.theme.accentColor} solid 1px;
   padding: 20px;
   z-index: 11;
   overflow: auto;
@@ -59,6 +60,13 @@ const ItemLink = styled(Link)`
   background-color: ${(props) => props.theme.bgColor};
 `;
 
+const ContentsBox = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  width: 100%;
+`;
+
 const sideBoxVariants = {
   initial: {
     x: -150,
@@ -91,7 +99,7 @@ export default function Sidebar({ blogList }) {
           >
             <BtnWrapper>
               <CloseBtn onClick={onToggle}>
-                <FontAwesomeIcon icon={faAngleDoubleLeft} />
+                <FaAngleDoubleLeft />
               </CloseBtn>
             </BtnWrapper>
             {blogList ? (
@@ -114,8 +122,11 @@ export default function Sidebar({ blogList }) {
         ) : null}
       </AnimatePresence>
       <OpenBtn onClick={onToggle}>
-        <FontAwesomeIcon icon={faAngleDoubleRight} />
+        <FaAngleDoubleRight />
       </OpenBtn>
+      <ContentsBox>
+        <MdConverter />
+      </ContentsBox>
     </Wrapper>
   );
 }
