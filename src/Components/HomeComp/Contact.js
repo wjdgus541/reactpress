@@ -3,17 +3,13 @@ import { FaGithubSquare } from "react-icons/fa";
 import { SiNotion } from "react-icons/si";
 import { FiMail } from "react-icons/fi";
 
-const ColumnBox = styled.div`
+const ContactBox = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const ContactBox = styled(ColumnBox)`
   width: 65%;
   height: 250px;
   margin-top: 20px;
-  margin-bottom: 50px;
   background-color: ${(props) => props.theme.boxColor};
   border-radius: 20px;
 `;
@@ -40,7 +36,11 @@ const ContactWrapper = styled.div`
   gap: 20px;
 `;
 
-const ContactsWrapper = styled(ColumnBox)``;
+const ContactsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const IconsTitle = styled.span`
   margin-bottom: 8px;

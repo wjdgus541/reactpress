@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   flex-direction: row;
 `;
 
-const Sidebox = styled(motion.div)`
+const Sidebox = styled(motion.aside)`
   background-color: ${(props) => props.theme.bgColor};
   width: 150px;
   height: 88vh;
@@ -53,11 +53,14 @@ const List = styled.ul`
 
 const Item = styled.li`
   width: 100%;
+  margin: 8px 0;
+  :hover {
+    color: ${(props) => props.theme.accentColor};
+  }
 `;
 
 const ItemLink = styled(Link)`
   width: 100%;
-  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const ContentsBox = styled.div`

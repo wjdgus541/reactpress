@@ -43,11 +43,16 @@ const SearchList = styled.ul`
   background-color: white;
   border: solid 1px gray;
   list-style: none;
+  border-color: ${(props) => props.theme.accentColor};
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const SearchItem = styled.li`
-  width: 100%;
-  background-color: ${(props) => props.theme.bgColor};
+  padding: 0 5px;
+  width: 186px;
+  &:hover {
+    background-color: ${(props) => props.theme.accentColor};
+  }
 `;
 
 const SearchLink = styled(Link)`

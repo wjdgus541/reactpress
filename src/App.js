@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar";
+import Header from "./Components/Header";
 import Blog from "./Routes/Blog";
 import Home from "./Routes/Home";
 import { darkTheme, lightTheme } from "./theme";
@@ -51,7 +51,7 @@ function App() {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Router>
-        <Navbar />
+        <Header />
         <Switch>
           <Route path={["/blog", "/blog/main"]}>
             <Blog />
