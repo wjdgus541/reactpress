@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 
 const Wrapper = styled.div`
   display: flex;
+  overflow: auto;
 `;
 
 export default function Blog() {

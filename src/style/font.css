@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "OTWelcomeBA";
+  font-weight: 400;
+  src: url("../font/웰컴체\ Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "OTWelcomeBA";
+  font-weight: 700;
+  src: url("../font/웰컴체\ Bold.ttf") format("truetype");
+}

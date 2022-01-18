@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Profile from "../Components/HomeComp/Profile";
 import Skills from "../Components/HomeComp/Skills";
 import Contact from "../Components/HomeComp/Contact";
+import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,12 +32,27 @@ const FooterText = styled.p`
 `;
 
 export default function Home() {
+  let device = "";
+  const isTablet = useMediaQuery({
+    query: "(min-width:480px) and (max-width:767px)",
+  });
+  const isPc = useMediaQuery({
+    query: "(min-width:768px) and (max-width:1023px)",
+  });
+  const isBigPc = useMediaQuery({
+    query: "(min-width:1024px)",
+  });
+  if (isTablet) device = "tablet";
+  else if (isPc) device = "pc";
+  else if (isBigPc) device = "bigPc";
+  else device = "mobile";
+
   return (
     <>
       <Wrapper>
-        <Profile />
-        <Skills />
-        <Contact />
+        <Profile maxWidth={device} />
+        <Skills maxWidth={device} />
+        <Contact maxWidth={device} />
         <Footer>
           <FooterText>
             해당 웹사이트는 개인 공부 및 포트폴리오의 목적으로 만들어졌습니다.

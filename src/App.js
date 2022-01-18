@@ -9,11 +9,12 @@ import { isDarkAtom, blogListAtom } from "./recoil";
 import { createGlobalStyle } from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { useEffect } from "react";
+import "./style/font.css";
 
 const GlobalStyle = createGlobalStyle`
 body {
+  font-family: "OTWelcomeBA";
 	margin:0;
-	height: 90vh;
 	width: 100vw;
   color: ${(props) => props.theme.textColor};
   background-color:${(props) => props.theme.bgColor};
