@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom, blogListAtom } from "./recoil";
 import { createGlobalStyle } from "styled-components";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import "./style/font.css";
 
@@ -35,7 +35,7 @@ p {
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
 
-  const setBlogList = useSetRecoilState(blogListAtom);
+  const [blogList, setBlogList] = useRecoilState(blogListAtom);
 
   useEffect(() => {
     const list = function importAll() {
@@ -49,20 +49,24 @@ function App() {
     setBlogList(list);
   }, []);
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <Router>
-        <Header />
-        <Switch>
-          <Route path={["/blog", "/blog/main"]}>
-            <Blog />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <>
+      {Object.keys(blogList).length !== 0 ? (
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+          <GlobalStyle />
+          <Router>
+            <Header />
+            <Switch>
+              <Route path={["/blog", "/blog/main", "/blog/:listtitle"]}>
+                <Blog />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      ) : null}
+    </>
   );
 }
 

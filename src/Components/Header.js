@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Search from "./Search";
 import DarkBtn from "./DarkmodeBtn";
 import { HiOutlineExternalLink } from "react-icons/hi";
-import { useEffect } from "react/cjs/react.development";
 import { useState } from "react";
 
 const Navbox = styled.div`

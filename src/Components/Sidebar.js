@@ -115,7 +115,7 @@ export default function Sidebar({ blogList }) {
                         state: { blogtitle: item },
                       }}
                     >
-                      <Item key={item}>{item}</Item>
+                      <Item key={item.id}>{item}</Item>
                     </ItemLink>
                   );
                 })}

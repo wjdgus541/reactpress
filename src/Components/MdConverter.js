@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useLocation } from "react-router";
@@ -9,14 +9,13 @@ const Wrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
 `;
 
-function MdConverter() {
+export default function MdConverter() {
   const [md, setMd] = useState("");
   const { state } = useLocation();
 
-  const selectTitle = (title) => {
+  function selectTitle(title) {
     const testmd = import(`../MDs/${title}.md`).then((r) => r.default);
     testmd.then((data) => {
       fetch(data)
@@ -25,14 +24,17 @@ function MdConverter() {
           setMd(text);
         });
     });
-  };
+  }
   state ? selectTitle(state.blogtitle) : selectTitle("main");
 
   return (
     <Wrapper>
-      <ReactMarkdown children={md} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+      {md ? (
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          children={md}
+        ></ReactMarkdown>
+      ) : null}
     </Wrapper>
   );
 }
-
-export default React.memo(MdConverter);

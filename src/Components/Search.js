@@ -227,7 +227,7 @@ export default function Search() {
                       }}
                       onClick={resetfilter}
                     >
-                      <SearchItem key={item}>{item}</SearchItem>
+                      <SearchItem key={item.id}>{item}</SearchItem>
                     </SearchLink>
                   ))}
                 </SearchList>

@@ -82,7 +82,6 @@ const Intro2Tablet = styled(Intro2)`
 `;
 
 function Profile({ maxWidth }) {
-  console.log(maxWidth);
   return (
     <>
       {maxWidth === "mobile" && (
