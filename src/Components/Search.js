@@ -5,6 +5,7 @@ import { blogListAtom } from "../recoil";
 import { useRecoilValue } from "recoil";
 import { Link, useHistory } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
 
 const SearchForm = styled(motion.form)`
   border-radius: 20px;
@@ -12,6 +13,10 @@ const SearchForm = styled(motion.form)`
   padding: 5px 5px;
   display: flex;
   align-items: center;
+`;
+
+const SearchFormMobile = styled(SearchForm)`
+  width: 100px;
 `;
 
 const IconBox = styled(motion.div)`
@@ -36,6 +41,10 @@ const SearchInput = styled.input`
   }
 `;
 
+const SearchInputMobile = styled(SearchInput)`
+  width: 78px;
+`;
+
 const SearchList = styled.ul`
   position: fixed;
   width: 196px;
@@ -47,12 +56,20 @@ const SearchList = styled.ul`
   background-color: ${(props) => props.theme.bgColor};
 `;
 
+const SearchListMobile = styled(SearchList)`
+  width: 100px;
+`;
+
 const SearchItem = styled.li`
   padding: 0 5px;
   width: 186px;
   &:hover {
     background-color: ${(props) => props.theme.accentColor};
   }
+`;
+
+const SearchItemMobile = styled(SearchItem)`
+  width: 90px;
 `;
 
 const SearchLink = styled(Link)`
@@ -65,6 +82,21 @@ const formVariants = {
   },
   visible: {
     width: 187,
+    transition: { type: "tween" },
+  },
+  leaving: {
+    width: 0,
+    opacity: 0,
+    transition: { duration: 0.1, type: "tween" },
+  },
+};
+
+const formVariantsMobile = {
+  initial: {
+    width: 0,
+  },
+  visible: {
+    width: 100,
     transition: { type: "tween" },
   },
   leaving: {
@@ -121,46 +153,87 @@ export default function Search() {
     if (searchOpen === true) inputFocus.current.focus();
   }, [searchOpen]);
 
+  const isMobile = useMediaQuery({
+    query: "(max-width:480px)",
+  });
+
   return (
     <>
       <AnimatePresence>
-        {searchOpen ? (
-          <>
-            <SearchForm
-              variants={formVariants}
-              initial="initial"
-              animate="visible"
-              exit="leaving"
-            >
-              <IconBox layoutId="icon">
-                <SearchIcon onClick={searchBoxToggle} />
-              </IconBox>
-              <SearchInput
-                value={searchValue}
-                onChange={onChange}
-                onKeyPress={onEnter}
-                // onBlur={outFocus}
-                ref={inputFocus}
-                type="text"
-              />
-            </SearchForm>
-            {filterList.length > 0 ? (
-              <SearchList>
-                {filterList.map((item) => (
-                  <SearchLink
-                    to={{
-                      pathname: `/blog/${item}`,
-                      state: { blogtitle: item },
-                    }}
-                    onClick={resetfilter}
-                  >
-                    <SearchItem key={item}>{item}</SearchItem>
-                  </SearchLink>
-                ))}
-              </SearchList>
-            ) : null}
-          </>
-        ) : null}
+        {searchOpen &&
+          (isMobile ? (
+            <>
+              <SearchFormMobile
+                variants={formVariantsMobile}
+                initial="initial"
+                animate="visible"
+                exit="leaving"
+              >
+                <IconBox layoutId="icon">
+                  <SearchIcon onClick={searchBoxToggle} />
+                </IconBox>
+                <SearchInputMobile
+                  value={searchValue}
+                  onChange={onChange}
+                  onKeyPress={onEnter}
+                  // onBlur={outFocus}
+                  ref={inputFocus}
+                  type="text"
+                />
+              </SearchFormMobile>
+              {filterList.length > 0 ? (
+                <SearchListMobile>
+                  {filterList.map((item) => (
+                    <SearchLink
+                      to={{
+                        pathname: `/blog/${item}`,
+                        state: { blogtitle: item },
+                      }}
+                      onClick={resetfilter}
+                    >
+                      <SearchItemMobile key={item}>{item}</SearchItemMobile>
+                    </SearchLink>
+                  ))}
+                </SearchListMobile>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <SearchForm
+                variants={formVariants}
+                initial="initial"
+                animate="visible"
+                exit="leaving"
+              >
+                <IconBox layoutId="icon">
+                  <SearchIcon onClick={searchBoxToggle} />
+                </IconBox>
+                <SearchInput
+                  value={searchValue}
+                  onChange={onChange}
+                  onKeyPress={onEnter}
+                  // onBlur={outFocus}
+                  ref={inputFocus}
+                  type="text"
+                />
+              </SearchForm>
+              {filterList.length > 0 ? (
+                <SearchList>
+                  {filterList.map((item) => (
+                    <SearchLink
+                      to={{
+                        pathname: `/blog/${item}`,
+                        state: { blogtitle: item },
+                      }}
+                      onClick={resetfilter}
+                    >
+                      <SearchItem key={item}>{item}</SearchItem>
+                    </SearchLink>
+                  ))}
+                </SearchList>
+              ) : null}
+            </>
+          ))}
       </AnimatePresence>
       {searchOpen ? null : (
         <IconBox layoutId="icon">
