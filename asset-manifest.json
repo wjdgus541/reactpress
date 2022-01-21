@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/reactpress/static/css/main.70895b89.css",
+    "main.js": "/reactpress/static/js/main.96975d30.js",
+    "static/media/웰컴체 Regular.ttf": "/reactpress/static/media/웰컴체 Regular.a35fda31b80bc5fc1a09.ttf",
+    "static/media/웰컴체 Bold.ttf": "/reactpress/static/media/웰컴체 Bold.e9ba228ee3ad08fbaa59.ttf",
+    "static/media/main.jpg": "/reactpress/static/media/main.8f1e58131ce9a19357d7.jpg",
+    "index.html": "/reactpress/index.html",
+    "static/media/testmd.md": "/reactpress/static/media/testmd.bdaaa193ee7f35eb749b.md",
+    "static/media/test1.md": "/reactpress/static/media/test1.975962bee6f7189c060b.md",
+    "static/media/test2.md": "/reactpress/static/media/test2.73353baa3adda527f60f.md",
+    "static/media/test3.md": "/reactpress/static/media/test3.2ae3f22f989009e1e66a.md",
+    "static/media/a.md": "/reactpress/static/media/a.2ad24a42b4b983ed5105.md",
+    "static/media/main.md": "/reactpress/static/media/main.2c703953ed20d37dc6c0.md",
+    "main.70895b89.css.map": "/reactpress/static/css/main.70895b89.css.map",
+    "main.96975d30.js.map": "/reactpress/static/js/main.96975d30.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70895b89.css",
+    "static/js/main.96975d30.js"
+  ]
+}
