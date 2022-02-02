@@ -1,13 +1,13 @@
 # reactpress
 ---
 
-[사이트]:https://wjdgus541.github.io/
+[reactpress 사이트](https://wjdgus541.github.io/)
 
 ---
 
 ## Vuepress 따라하기
 
-[Vuepress]:https://vuepress.vuejs.org/
+[Vuepress](https://vuepress.vuejs.org/)
 
 
 TIL을 기록할 블로그를 찾아보다 Vuepress라는 '정적 사이트 생성기'에대해 알게 되었다.
