@@ -13,10 +13,7 @@ const SearchForm = styled(motion.form)`
   padding: 5px 5px;
   display: flex;
   align-items: center;
-`;
-
-const SearchFormMobile = styled(SearchForm)`
-  width: 100px;
+  width: ${(props) => props.width};
 `;
 
 const IconBox = styled(motion.div)`
@@ -33,7 +30,7 @@ const SearchIcon = styled(FaSearch)`
 const SearchInput = styled.input`
   border: none;
   margin-left: 5px;
-  width: 150px;
+  width: ${(props) => props.width};
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
   &:focus {
@@ -41,23 +38,15 @@ const SearchInput = styled.input`
   }
 `;
 
-const SearchInputMobile = styled(SearchInput)`
-  width: 78px;
-`;
-
 const SearchList = styled.ul`
   position: fixed;
-  width: 196px;
+  width: ${(props) => props.width};
   top: 30px;
   background-color: white;
   border: solid 1px gray;
   list-style: none;
   border-color: ${(props) => props.theme.accentColor};
   background-color: ${(props) => props.theme.bgColor};
-`;
-
-const SearchListMobile = styled(SearchList)`
-  width: 100px;
 `;
 
 const SearchItem = styled.li`
@@ -108,9 +97,10 @@ const formVariantsMobile = {
 
 export default function Search() {
   const [filterList, setfilterList] = useState([]);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const inputFocus = useRef();
+  const listFocus = useRef();
   const history = useHistory();
   const listKeys = Object.keys(useRecoilValue(blogListAtom));
 
@@ -139,18 +129,22 @@ export default function Search() {
   };
   const outFocus = (e) => {
     // console.log("blur : ", e);
-    setfilterList([]);
-    setSearchValue("");
-    setSearchOpen(false);
+    // if (listFocus.current) {
+    //   console.log("list Click");
+    // } else {
+    setfilterList(() => []);
+    setSearchValue(() => "");
+    setSearchOpen(() => false);
   };
   const resetfilter = (e) => {
     // console.log("search : ", e);
-    setfilterList([]);
-    setSearchValue("");
+    setfilterList(() => []);
+    setSearchValue(() => "");
   };
 
   useEffect(() => {
     if (searchOpen === true) inputFocus.current.focus();
+    else outFocus();
   }, [searchOpen]);
 
   const isMobile = useMediaQuery({
@@ -163,7 +157,8 @@ export default function Search() {
         {searchOpen &&
           (isMobile ? (
             <>
-              <SearchFormMobile
+              <SearchForm
+                width={"100px"}
                 variants={formVariantsMobile}
                 initial="initial"
                 animate="visible"
@@ -172,17 +167,18 @@ export default function Search() {
                 <IconBox layoutId="icon">
                   <SearchIcon onClick={searchBoxToggle} />
                 </IconBox>
-                <SearchInputMobile
+                <SearchInput
+                  width={"79px"}
                   value={searchValue}
                   onChange={onChange}
                   onKeyPress={onEnter}
-                  // onBlur={outFocus}
+                  onBlur={outFocus}
                   ref={inputFocus}
                   type="text"
                 />
-              </SearchFormMobile>
+              </SearchForm>
               {filterList.length > 0 ? (
-                <SearchListMobile>
+                <SearchList width={"100px"}>
                   {filterList.map((item) => (
                     <SearchLink
                       to={{
@@ -194,12 +190,13 @@ export default function Search() {
                       <SearchItemMobile key={item}>{item}</SearchItemMobile>
                     </SearchLink>
                   ))}
-                </SearchListMobile>
+                </SearchList>
               ) : null}
             </>
           ) : (
             <>
               <SearchForm
+                width={"198px"}
                 variants={formVariants}
                 initial="initial"
                 animate="visible"
@@ -209,16 +206,17 @@ export default function Search() {
                   <SearchIcon onClick={searchBoxToggle} />
                 </IconBox>
                 <SearchInput
+                  width={"150px"}
                   value={searchValue}
                   onChange={onChange}
                   onKeyPress={onEnter}
-                  // onBlur={outFocus}
+                  onBlur={outFocus}
                   ref={inputFocus}
                   type="text"
                 />
               </SearchForm>
               {filterList.length > 0 ? (
-                <SearchList>
+                <SearchList width={"196px"}>
                   {filterList.map((item) => (
                     <SearchLink
                       to={{

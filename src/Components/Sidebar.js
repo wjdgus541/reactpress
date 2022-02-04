@@ -66,8 +66,8 @@ const ItemLink = styled(Link)`
 const ContentsBox = styled.div`
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
   width: 100%;
+  height: 100vh;
 `;
 
 const sideBoxVariants = {
