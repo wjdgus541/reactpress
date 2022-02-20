@@ -1,7 +1,7 @@
 # reactpress
 ---
 
-[reactpress 사이트](https://wjdgus541.github.io/)
+[reactpress 사이트](https://wjdgus541.github.io/reactpress/)
 
 ---
 
