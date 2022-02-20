@@ -133,8 +133,6 @@ export default function Search() {
     //   console.log("list Click");
     // } else {
     setfilterList(() => []);
-    setSearchValue(() => "");
-    setSearchOpen(() => false);
   };
   const resetfilter = (e) => {
     // console.log("search : ", e);
@@ -172,7 +170,7 @@ export default function Search() {
                   value={searchValue}
                   onChange={onChange}
                   onKeyPress={onEnter}
-                  onBlur={outFocus}
+                  // onBlur={outFocus}
                   ref={inputFocus}
                   type="text"
                 />
@@ -210,7 +208,7 @@ export default function Search() {
                   value={searchValue}
                   onChange={onChange}
                   onKeyPress={onEnter}
-                  onBlur={outFocus}
+                  // onBlur={outFocus}
                   ref={inputFocus}
                   type="text"
                 />
@@ -219,11 +217,11 @@ export default function Search() {
                 <SearchList width={"196px"}>
                   {filterList.map((item) => (
                     <SearchLink
+                      onClick={resetfilter}
                       to={{
                         pathname: `/blog/${item}`,
                         state: { blogtitle: item },
                       }}
-                      onClick={resetfilter}
                     >
                       <SearchItem key={item.id}>{item}</SearchItem>
                     </SearchLink>
